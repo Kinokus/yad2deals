@@ -47,6 +47,9 @@ class RealEstateDB {
     }
 
     // Create a new real estate entry
+    // Omit<T, K> is a TypeScript utility type that constructs a type by picking all properties from T
+    // and then removing K properties. In this case, we're creating a type that has all properties
+    // from RealEstate except 'id', 'createdAt', and 'updatedAt' since these are auto-generated.
     create(realEstate: Omit<RealEstate, 'id' | 'createdAt' | 'updatedAt'>): RealEstate {
         const newEntry: RealEstate = {
             ...realEstate,

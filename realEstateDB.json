@@ -1,0 +1,67 @@
+[
+  {
+    "title": "Modern Apartment in Tel Aviv",
+    "price": 2500000,
+    "location": "Tel Aviv, Rothschild Blvd",
+    "description": "Beautiful 3-bedroom apartment with sea view, recently renovated",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "area": 120,
+    "type": "apartment",
+    "id": "1748842080503",
+    "createdAt": "2025-06-02T05:28:00.503Z",
+    "updatedAt": "2025-06-02T05:28:00.503Z"
+  },
+  {
+    "title": "Family House in Herzliya",
+    "price": 4500000,
+    "location": "Herzliya Pituach",
+    "description": "Spacious family house with garden and pool",
+    "bedrooms": 5,
+    "bathrooms": 3,
+    "area": 250,
+    "type": "house",
+    "id": "1748842080503",
+    "createdAt": "2025-06-02T05:28:00.503Z",
+    "updatedAt": "2025-06-02T05:28:00.503Z"
+  },
+  {
+    "title": "Studio Apartment in Jerusalem",
+    "price": 1200000,
+    "location": "Jerusalem, German Colony",
+    "description": "Cozy studio apartment in historic neighborhood",
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "area": 45,
+    "type": "apartment",
+    "id": "1748842080503",
+    "createdAt": "2025-06-02T05:28:00.503Z",
+    "updatedAt": "2025-06-02T05:28:00.503Z"
+  },
+  {
+    "title": "Land Plot in Modiin",
+    "price": 1800000,
+    "location": "Modiin",
+    "description": "Buildable land plot in developing area",
+    "bedrooms": 0,
+    "bathrooms": 0,
+    "area": 500,
+    "type": "land",
+    "id": "1748842080503",
+    "createdAt": "2025-06-02T05:28:00.503Z",
+    "updatedAt": "2025-06-02T05:28:00.503Z"
+  },
+  {
+    "title": "Luxury Penthouse in Ramat Gan",
+    "price": 5500000,
+    "location": "Ramat Gan, Diamond District",
+    "description": "Luxurious penthouse with panoramic views",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "area": 200,
+    "type": "apartment",
+    "id": "1748842080503",
+    "createdAt": "2025-06-02T05:28:00.503Z",
+    "updatedAt": "2025-06-02T05:28:00.503Z"
+  }
+]

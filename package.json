@@ -5,7 +5,8 @@
   "main": "realEstateDB.ts",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node realEstateDB.ts"
+    "start": "ts-node realEstateDB.ts",
+    "seed": "ts-node seed.ts"
   },
   "dependencies": {
     "typescript": "^5.0.0"
