@@ -3,17 +3,27 @@ import * as path from 'path';
 
 // Define the RealEstate interface
 interface RealEstate {
-    id: string;
-    title: string;
+    address: {
+        city: {
+            text: string;
+        };
+        neighborhood: {
+            text: string;
+        };
+        houseNumber: number;
+        street: {
+            text: string;
+        };
+        addressMasterId: number;
+    };
+    buildYear: number;
+    buildingMR: number;
+    floor: number;
+    numberOfFloors: number;
     price: number;
-    location: string;
-    description: string;
-    bedrooms: number;
-    bathrooms: number;
-    area: number; // in square meters
-    type: 'apartment' | 'house' | 'land';
-    createdAt: string;
-    updatedAt: string;
+    propertyType: string;
+    rooms: number;
+    saleDate: string;
 }
 
 class RealEstateDB {
@@ -47,15 +57,10 @@ class RealEstateDB {
     }
 
     // Create a new real estate entry
-    // Omit<T, K> is a TypeScript utility type that constructs a type by picking all properties from T
-    // and then removing K properties. In this case, we're creating a type that has all properties
-    // from RealEstate except 'id', 'createdAt', and 'updatedAt' since these are auto-generated.
-    create(realEstate: Omit<RealEstate, 'id' | 'createdAt' | 'updatedAt'>): RealEstate {
+    create(realEstate: Omit<RealEstate, 'saleDate'>): RealEstate {
         const newEntry: RealEstate = {
             ...realEstate,
-            id: Date.now().toString(),
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
+            saleDate: new Date().toISOString()
         };
 
         this.data.push(newEntry);
@@ -68,20 +73,19 @@ class RealEstateDB {
         return this.data;
     }
 
-    // Read a single real estate entry by ID
-    getById(id: string): RealEstate | undefined {
-        return this.data.find(entry => entry.id === id);
+    // Read a single real estate entry by address ID
+    getByAddressId(addressId: number): RealEstate | undefined {
+        return this.data.find(entry => entry.address.addressMasterId === addressId);
     }
 
     // Update a real estate entry
-    update(id: string, updates: Partial<Omit<RealEstate, 'id' | 'createdAt' | 'updatedAt'>>): RealEstate | undefined {
-        const index = this.data.findIndex(entry => entry.id === id);
+    update(addressId: number, updates: Partial<Omit<RealEstate, 'address'>>): RealEstate | undefined {
+        const index = this.data.findIndex(entry => entry.address.addressMasterId === addressId);
         if (index === -1) return undefined;
 
         const updatedEntry: RealEstate = {
             ...this.data[index],
-            ...updates,
-            updatedAt: new Date().toISOString()
+            ...updates
         };
 
         this.data[index] = updatedEntry;
@@ -90,9 +94,9 @@ class RealEstateDB {
     }
 
     // Delete a real estate entry
-    delete(id: string): boolean {
+    delete(addressId: number): boolean {
         const initialLength = this.data.length;
-        this.data = this.data.filter(entry => entry.id !== id);
+        this.data = this.data.filter(entry => entry.address.addressMasterId !== addressId);
         const deleted = initialLength !== this.data.length;
         if (deleted) {
             this.saveData();
@@ -104,6 +108,15 @@ class RealEstateDB {
     search(criteria: Partial<RealEstate>): RealEstate[] {
         return this.data.filter(entry => {
             return Object.entries(criteria).every(([key, value]) => {
+                if (key === 'address') {
+                    return Object.entries(value as object).every(([addrKey, addrValue]) => {
+                        const addressField = entry.address[addrKey as keyof typeof entry.address];
+                        if (addrKey === 'city' || addrKey === 'neighborhood' || addrKey === 'street') {
+                            return (addressField as { text: string }).text === (addrValue as { text: string }).text;
+                        }
+                        return addressField === addrValue;
+                    });
+                }
                 return entry[key as keyof RealEstate] === value;
             });
         });
