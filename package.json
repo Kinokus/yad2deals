@@ -1,0 +1,17 @@
+{
+  "name": "yad2deals",
+  "version": "1.0.0",
+  "description": "Real estate data management system",
+  "main": "realEstateDB.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node realEstateDB.ts"
+  },
+  "dependencies": {
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0"
+  }
+} 
